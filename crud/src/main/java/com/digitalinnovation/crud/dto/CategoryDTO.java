@@ -6,19 +6,19 @@ import java.io.Serializable;
 
 public class CategoryDTO implements Serializable {
     private Long id;
-    private String nome;
+    private String name;
 
     public CategoryDTO() {
     }
 
-    public CategoryDTO(Long id, String nome) {
+    public CategoryDTO(Long id, String name) {
         this.id = id;
-        this.nome = nome;
+        this.name = name;
     }
 
     public CategoryDTO(Category entity) {
         id = entity.getId();
-        nome = entity.getNome();
+        name = entity.getName();
     }
 
     public Long getId() {
@@ -29,11 +29,11 @@ public class CategoryDTO implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String nome) {
+        this.name = name;
     }
 }
