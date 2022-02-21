@@ -1,7 +1,7 @@
 package com.digitalinnovation.crud.controller;
 
-import com.digitalinnovation.crud.dto.CategoryDTO;
-import com.digitalinnovation.crud.services.CategoryService;
+import com.digitalinnovation.crud.dto.ProductDTO;
+import com.digitalinnovation.crud.services.ProductService;
 import com.digitalinnovation.crud.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,32 +17,32 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    private CategoryService categoryService;
+    private ProductService productService;
 
     @GetMapping
-    public ResponseEntity<List<CategoryDTO>> findAll() {
-        List<CategoryDTO> list = categoryService.findAll();
+    public ResponseEntity<List<ProductDTO>> findAll() {
+        List<ProductDTO> list = productService.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<CategoryDTO> findById(@PathVariable Long id) {
-        CategoryDTO dto = categoryService.findById(id);
+    public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
+        ProductDTO dto = productService.findById(id);
         return ResponseEntity.ok().body(dto);
     }
 
     @PostMapping
-    public ResponseEntity<CategoryDTO> insert(@RequestBody CategoryDTO dto) {
-        dto = categoryService.insert(dto);
+    public ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO dto) {
+        dto = productService.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<CategoryDTO> update(@RequestBody CategoryDTO dto, @PathVariable Long id) {
+    public ResponseEntity<ProductDTO> update(@RequestBody ProductDTO dto, @PathVariable Long id) {
         try {
-            dto = categoryService.update(dto, id);
+            dto = productService.update(dto, id);
             return ResponseEntity.ok().body(dto);
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Id não encontrado " + id);
@@ -50,8 +50,8 @@ public class ProductController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<CategoryDTO> delete(@PathVariable Long id) {
-        categoryService.delete(id);
+    public ResponseEntity<ProductDTO> delete(@PathVariable Long id) {
+        productService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
